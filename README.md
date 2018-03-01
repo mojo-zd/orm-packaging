@@ -1,3 +1,5 @@
+[![Go Report Card](https://goreportcard.com/badge/github.com/mojo-zd/orm-packaging)](https://goreportcard.com/report/github.com/mojo-zd/orm-packaging)
+
 ### 目的
 本项目主要针对平时使用的xorm、beego orm做了简单封装
 - 对复杂操作进行包装
