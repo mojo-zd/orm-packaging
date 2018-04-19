@@ -89,6 +89,13 @@ func (base ConcreteService) Exist(condition map[string]interface{}, table interf
 	return
 }
 
+// QuerySetter get beego query setter object
+func (base ConcreteService) QuerySetter(condition map[string]interface{}, table interface{}) orm.QuerySeter {
+	o := orm.NewOrm()
+	query := o.QueryTable(table)
+	return queryBuilder(query, condition)
+}
+
 // QueryElement query record by page
 func (base ConcreteService) QueryElement(page *pagination.Pagination, condition map[string]interface{}, table interface{}) orm.QuerySeter {
 	o := orm.NewOrm()
