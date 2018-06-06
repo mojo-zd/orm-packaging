@@ -1,7 +1,9 @@
 package pkg
 
 import (
+	"os"
 	"strconv"
+	"strings"
 	"sync"
 
 	"github.com/astaxie/beego"
@@ -42,4 +44,20 @@ func (l *Loader) GetInt64(key string, def ...int64) (v int64) {
 	}
 	v, _ = strconv.ParseInt(strV, 10, 64)
 	return
+}
+
+func GetVariable(name, defVal string) string {
+	value := os.Getenv(name)
+	if IsEmpty(value) {
+		return defVal
+	}
+	return value
+}
+
+func IsEmpty(value string) bool {
+	value = strings.Trim(value, " ")
+	if len(value) == 0 {
+		return true
+	}
+	return false
 }

@@ -2,12 +2,11 @@ package database
 
 import (
 	"fmt"
-	"os"
-	"strings"
 	"sync"
 
 	"github.com/go-xorm/core"
 	"github.com/go-xorm/xorm"
+	"github.com/orm-packaging/pkg"
 )
 
 var (
@@ -39,11 +38,11 @@ type DatabaseInfo struct {
 }
 
 func (d *DatabaseInfo) verbose() {
-	d.User = GetVariable("DB_USER", DEFAULT_USER)
-	d.Password = GetVariable("DB_PASSWORD", DEFAULT_PASSWORD)
-	d.Host = GetVariable("DB_URL", DEFAULT_HOST)
-	d.Port = GetVariable("DB_PORT", DEFAULT_PORT)
-	d.Database = GetVariable("MYSQL_DATABASE", DEFAULT_DATABASE)
+	d.User = pkg.GetVariable("DB_USER", DEFAULT_USER)
+	d.Password = pkg.GetVariable("DB_PASSWORD", DEFAULT_PASSWORD)
+	d.Host = pkg.GetVariable("DB_URL", DEFAULT_HOST)
+	d.Port = pkg.GetVariable("DB_PORT", DEFAULT_PORT)
+	d.Database = pkg.GetVariable("MYSQL_DATABASE", DEFAULT_DATABASE)
 }
 
 func (d *DatabaseInfo) Builder() string {
@@ -72,20 +71,4 @@ func setOrmEngineInfo() {
 	OrmEngine.SetMaxOpenConns(MAX_OPEN_CONN)
 	OrmEngine.SetMapper(core.GonicMapper{})
 	OrmEngine.ShowSQL(false)
-}
-
-func GetVariable(name, defVal string) string {
-	value := os.Getenv(name)
-	if IsEmpty(value) {
-		return defVal
-	}
-	return value
-}
-
-func IsEmpty(value string) bool {
-	value = strings.Trim(value, " ")
-	if len(value) == 0 {
-		return true
-	}
-	return false
 }

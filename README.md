@@ -16,6 +16,7 @@
 ### [Update with map](#6)
 
 ## xorm
+## gorm
 
 <h2 id="0"> beego orm </h2>
 <h3 id="1">Insert</h3>
